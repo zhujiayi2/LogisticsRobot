@@ -38,7 +38,6 @@ generate_arduino_library(stepper-motor BOARD ${TARGET_BOARD}  # stepper-motor
         SRCS modules/stepper-motor/stepper-motor.cpp)
 generate_arduino_library(car-chassis BOARD ${TARGET_BOARD}  # car-chassis
         SRCS modules/car-chassis/car-chassis.cpp)
-# ================================================
 
 # ================================================
 #   生成固件 | Generate firmware
