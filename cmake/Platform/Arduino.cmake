@@ -2330,4 +2330,3 @@ else ()
         register_hardware_platform(${ARDUINO_SDK_PATH}/hardware/arduino/${_platform})
     endif ()
 endif ()
-
