@@ -1,44 +1,44 @@
 cmake_minimum_required(VERSION 2.8.4)
 
-# 使用 Arduino 工具链, 打开此文件设置环境和 CPU 型号
+# Configure Arduino toolchain. Open this file to set up your environment.
 set(CMAKE_TOOLCHAIN_FILE cmake/ArduinoToolchain.cmake)
-set(CMAKE_CXX_STANDARD 17)  # C++ 17 标准
+set(CMAKE_CXX_STANDARD 17)  # Use C++17 standard
 
 # ================================================
-#   自定义设置 | Custom settings
+#   Custom Settings
 # ================================================
-set(PROJECT_NAME LogisticsRobot)  # CMake 项目名称
-set(FIRMWARE_NAME firmware)  # 生成的固件文件名
+set(PROJECT_NAME LogisticsRobot)  # CMake project name
+set(FIRMWARE_NAME firmware)  # Firmware (.hex) name
 
-# 为 Debug 和 Release 配置不同的的优化等级
+# Configure optimizations, depending on -DCMAKE_BUILD_TYPE flag.
 if (CMAKE_BUILD_TYPE STREQUAL Debug)
-    add_compile_options(-O0)  # -O0 模式下, gdb 的定位最准确
+    add_compile_options(-O0)  # No optimization
 elseif (CMAKE_BUILD_TYPE STREQUAL Release)
-    add_compile_options(-O3)  # -O3 模式下, 程序运行速度最快
+    add_compile_options(-O3)  # Full optimization
 endif ()
 
-# 配置 CMake 项目
+# Configure CMake project.
 project(${PROJECT_NAME})
 
 # ================================================
-#   配置依赖库 | Configure dependency libraries
+#   Configure dependency libraries
 # ================================================
 generate_arduino_library(Wire BOARD ${TARGET_BOARD}  # Wire
         SRCS ${ARDUINO_SDK_PATH}/hardware/arduino/avr/libraries/Wire/src/Wire.cpp)
 
-# 配置头文件搜索路径
+# Configure global header searching path.
 include_directories(modules)
 
 # ================================================
-#   配置项目库 | Configure project library
+#   Configure project library
 # ================================================
 file(GLOB PROJECT_SRCS modules/*/*.c*)
 generate_arduino_library(${PROJECT_NAME} BOARD ${TARGET_BOARD} SRCS ${PROJECT_SRCS})
 
 # ================================================
-#   生成固件 | Generate firmware
+#   Generate firmware
 # ================================================
 generate_arduino_firmware(${FIRMWARE_NAME}
         BOARD ${TARGET_BOARD}
-        LIBS ${PROJECT_NAME} Wire  # 此处填写链接的库名称
-        SKETCH main.ino)
+        LIBS ${PROJECT_NAME} Wire  # Add more libraries here.
+        SKETCH LogisticsRobot.ino)

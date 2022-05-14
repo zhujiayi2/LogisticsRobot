@@ -4,7 +4,7 @@ NOTE: This project is designed for CMake to build. It will be very hard to move 
 
 ## Source structure
 
-- `main.ino` is the main source code file including `setup()` and `loop()`.
+- `LogisticsRobot.ino` is the main source code file including `setup()` and `loop()`.
 - `cmake` contains CMake scripts for configuring Arduino SDK and generating makefile.
 - `modules` stores all source files of submodules of this project. Each submodule has its own folder.
 

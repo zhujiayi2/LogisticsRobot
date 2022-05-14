@@ -37,17 +37,12 @@ namespace disable_constructors {
 
 #define NO_MOVE public disable_constructors::DisableMoveConstructor
 
-#define SELF (*this)
+#define self (*this)
 
-#define ATTR_READER(_var, _func)  \
-    inline auto _func() const { return _var; }
-#define ATTR_READER_REF(_var, _func)  \
-    inline auto &_func() const { return _var; }
+#define attr_reader(_var)  \
+    inline auto _var() const { return _var##_; }
 
-#define VIRTUAL_ATTR_READER(_type, _var, _func)  \
-    virtual _type _func() const { return _var; }
-
-#define OVERRIDE_ATTR_READER(_type, _var, _func)  \
-    inline _type _func() const override { return _var; }
+#define attr_reader_ref(_var)  \
+    inline auto &_var() const { return _var##_; }
 
 #endif  // LANG_FEATURES_H_
