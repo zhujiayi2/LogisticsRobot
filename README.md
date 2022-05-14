@@ -1,4 +1,12 @@
-# Arduino code of (2022) intelligent logistics robot project
+# Arduino code of 2022 logistics robot project
+
+NOTE: This project is designed for CMake to build. It will be very hard to move it to Arduino IDE.
+
+## Source structure
+
+- `main.ino` is the main source code file including `setup()` and `loop()`.
+- `cmake` contains CMake scripts for configuring Arduino SDK and generating makefile.
+- `modules` stores all source files of submodules of this project. Each submodule has its own folder.
 
 ## Build on Windows
 
