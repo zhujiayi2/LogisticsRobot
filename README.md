@@ -27,10 +27,7 @@ Steps:
 
    Here is an example:
    ```shell
-   cmake -G "CodeBlocks - MinGW Makefiles" \
-         -DCMAKE_BUILD_TYPE=Release \
-         -DCMAKE_MAKE_PROGRAM="...\MSYS64\mingw64\bin\mingw32-make.exe" \
-         ..
+   cmake -G "CodeBlocks - MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_MAKE_PROGRAM="...\MSYS64\mingw64\bin\mingw32-make.exe" ..
    ```
    Do not miss the last `..`.
 5. If no error occurs, run `...\mingw32-make.exe` to build the binary.
