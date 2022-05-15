@@ -11,19 +11,15 @@
 #include "LangFeatures.h"
 
 namespace color_detector {
-    constexpr uint8_t kDetectTimes = 8;  ///< Detect times per round
+    constexpr uint8_t kDetectionTimes = 8;  ///< Detection times per round
 
     enum Colors {
-        kNone = 0x0,
-        kRed = 0x1,
-        kGreen = 0x2,
-        kBlue = 0x3,
-        SIZE = 0x4
+        kNone = 0x0, kRed = 0x1, kGreen = 0x2, kBlue = 0x3, SIZE = 0x4
     };
 
-    class ColorDetector : NO_COPY {
+    class ColorDetector : SINGLETON {
     public:
-        static ColorDetector &Instance() {
+        inline static ColorDetector &Instance() {
             static ColorDetector _{};
             return _;
         }
@@ -32,17 +28,11 @@ namespace color_detector {
 
     private:
         ColorDetector() :
-                tcs_34725_(TCS34725_INTEGRATIONTIME_50MS, TCS34725_GAIN_4X),
-                color_val_(),
+                adafruit_tcs_34725_(TCS34725_INTEGRATIONTIME_50MS, TCS34725_GAIN_4X),
                 color_list_() {}
 
-        [[maybe_unused]] void Detect();
-
-        [[maybe_unused]] [[nodiscard]] Colors Recognize() const;
-
-        Adafruit_TCS34725 tcs_34725_;
-        int color_val_[3];
-        Colors color_list_[kDetectTimes];
+        Adafruit_TCS34725 adafruit_tcs_34725_;
+        Colors color_list_[kDetectionTimes];
     };
 }
 

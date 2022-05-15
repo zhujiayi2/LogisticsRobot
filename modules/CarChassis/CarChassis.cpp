@@ -2,7 +2,7 @@
 #include "CarChassis.h"
 #include "RobotArm.h"
 
-[[maybe_unused]] void car_chassis::CarChassis::SetMode(int mode) {
+void car_chassis::CarChassis::SetMode(int mode) {
     switch (mode) {
         case 1:
             Right();
@@ -16,7 +16,7 @@
     }
 }
 
-[[maybe_unused]] long car_chassis::CarChassis::GetDistance(const int *pin) {
+long car_chassis::CarChassis::GetDistance(const int *pin) {
     long duration;
     pinMode(pin[1], OUTPUT);
     pinMode(pin[0], INPUT);
@@ -30,37 +30,32 @@
     return (duration < 2 || duration > 200) ? 0 : duration;
 }
 
-[[maybe_unused]] int car_chassis::CarChassis::CrossDetect() {
+int car_chassis::CarChassis::CrossDetect() {
     int s = 0;
     for (auto i = 0; i < 2; i++)
         s |= (digitalRead(kOutsideSensorPin[i]) << i);
     return s;
 }
 
-[[maybe_unused]] void car_chassis::CarChassis::ObstacleAvoid(int d) {
-    if ((GetDistance(kUltrasonicPin) > 2 && GetDistance(kUltrasonicPin) < d)) {
+[[maybe_unused]] void car_chassis::CarChassis::ObstacleAvoid(int min_distance) {
+    auto distance = GetDistance(kUltrasonicPin);
+
+    if ((distance > 2 && distance < min_distance)) {
         Forward();
         delay(1000);
         RobotArm.Run();
         delay(50000);
     } else {
+        auto cross_detect_mode = CrossDetect();
 #ifdef DEBUG
-        CarChassis::PrintDistance();
-        CarChassis::PrintGrayValue();
-        Log.infoln("Cross detect: %d.", CarChassis::CrossDetect());
+        Log.infoln("Distance: %d cm.", distance);
+        Log.infoln("Gray: %d | %d | %d | %d.",
+                   !(digitalRead(kOutsideSensorPin[0])),
+                   !(digitalRead(kMedialSensorPin[0])),
+                   !(digitalRead(kMedialSensorPin[1])),
+                   !(digitalRead(kOutsideSensorPin[1])));
+        Log.infoln("Cross detect: %d.", cross_detect_mode);
 #endif
-        SetMode(CrossDetect());
+        SetMode(cross_detect_mode);
     }
-}
-
-[[maybe_unused]] void car_chassis::CarChassis::PrintDistance() {
-    Log.infoln("Distance: %d cm.", GetDistance(kUltrasonicPin));
-}
-
-[[maybe_unused]] void car_chassis::CarChassis::PrintGrayValue() {
-    Log.infoln("Gray: %d | %d | %d | %d.",
-               !(digitalRead(kOutsideSensorPin[0])),
-               !(digitalRead(kMedialSensorPin[0])),
-               !(digitalRead(kMedialSensorPin[1])),
-               !(digitalRead(kOutsideSensorPin[1])));
 }

@@ -17,14 +17,10 @@ namespace robot_arm {
     constexpr int kDivPartNum = 40;  ///< Parts to divide when moving
 
     enum Blocks {
-        kNone [[maybe_unused]] = 0x0,
-        kBlockA = 0x1,
-        kBlockB = 0x2,
-        kBlockC = 0x3,
-        SIZE = 4
+        kNone [[maybe_unused]] = 0x0, kBlockA = 0x1, kBlockB = 0x2, kBlockC = 0x3, SIZE = 4
     };
 
-    class RobotArm {
+    class RobotArm : SINGLETON {
     public:
         static RobotArm &Instance() {
             static RobotArm _{};
@@ -43,7 +39,7 @@ namespace robot_arm {
 
         void Grab(Blocks block);
 
-        void Place(color_detector::Colors color);
+        void Place(Colors color);
 
         void ServoStart(int index);
 

@@ -18,9 +18,9 @@ namespace stepper_motor {
     constexpr uint16_t kTotalStep = kMainStep * kMicroStep;  ///< Total steps
     constexpr uint16_t kMaxSpeed = 6400;  ///< Max speed
 
-    class StepperMotor : NO_COPY {
+    class StepperMotor : SINGLETON {
     public:
-        [[maybe_unused]] inline static StepperMotor &Instance() {
+        inline static StepperMotor &Instance() {
             static StepperMotor _{};
             return _;
         }

@@ -3,6 +3,7 @@
 #include "RobotArm.h"
 
 constexpr uint32_t kBaudRate = 9600;
+constexpr int kMinDistance = 5;
 
 void setup() {
     Serial.begin(kBaudRate);
@@ -19,5 +20,5 @@ void setup() {
 }
 
 void loop() {
-    CarChassis::ObstacleAvoid(CarChassis::CrossDetect());
+    CarChassis::ObstacleAvoid(kMinDistance);
 }

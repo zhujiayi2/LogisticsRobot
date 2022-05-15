@@ -35,28 +35,22 @@ namespace car_chassis {
     constexpr int kMedialSensorPin[2] = {A5, A12};
     [[maybe_unused]] constexpr int kSensorPin[4] = {A3, A5, A12, A10};
 
-    class CarChassis : NO_COPY, NO_MOVE {
+    class CarChassis : SINGLETON {
     public:
         CarChassis() = delete;
 
-        [[maybe_unused]] static int CrossDetect();
-
-        [[maybe_unused]] static void ObstacleAvoid(int d);
-
-        [[maybe_unused]] static void PrintDistance();
-
-        [[maybe_unused]] static void PrintGrayValue();
+        [[maybe_unused]] static void ObstacleAvoid(int min_distance);
 
     private:
-        [[maybe_unused]] static void SetMode(int mode);
+        static void SetMode(int mode);
 
-        [[maybe_unused]] static inline void Forward() { StepperMotor.Move(0.105, -0.104, 0.104, -0.1); }
+        static inline void Forward() { StepperMotor.Move(0.104, -0.104, 0.104, -0.104); }
 
         [[maybe_unused]] static inline void Backward() { StepperMotor.Move(-0.5, 0.5, -0.5, 0.5); }
 
-        [[maybe_unused]] static inline void Left() { StepperMotor.Move(0.24, 0.24, 0.24, 0.24); }
+        static inline void Left() { StepperMotor.Move(0.24, 0.24, 0.24, 0.24); }
 
-        [[maybe_unused]] static inline void Right() { StepperMotor.Move(-0.23, -0.23, -0.23, -0.23); }
+        static inline void Right() { StepperMotor.Move(-0.23, -0.23, -0.23, -0.23); }
 
         [[maybe_unused]] static inline void PanLeft(double v) { StepperMotor.Move(v, v, -v, -v); }
 
@@ -64,7 +58,9 @@ namespace car_chassis {
 
         [[maybe_unused]] static inline void Stop() { StepperMotor.Move(0, 0, 0, 0); }
 
-        [[maybe_unused]] static long GetDistance(const int pin[2]);
+        static long GetDistance(const int pin[2]);
+
+        static int CrossDetect();
     };
 }
 
