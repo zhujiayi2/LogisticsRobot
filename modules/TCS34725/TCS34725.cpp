@@ -1,4 +1,4 @@
-/*!
+/**
  *  @file Adafruit_TCS34725.cpp
  *
  *  @mainpage Driver for the TCS34725 digital color sensors.
@@ -33,7 +33,7 @@
 
 #include "TCS34725.h"
 
-/*!
+/**
  *  @brief  Implements missing powf function
  *  @param  x
  *          Base number
@@ -45,7 +45,7 @@ float powf(const float x, const float y) {
     return (float) (pow((double) x, (double) y));
 }
 
-/*!
+/**
  *  @brief  Writes a register and an 8 bit value over I2C
  *  @param  reg
  *  @param  value
@@ -56,7 +56,7 @@ void AdafruitTCS34725::write8(uint8_t reg, uint32_t value) {
     i2c_dev->write(buffer, 2);
 }
 
-/*!
+/**
  *  @brief  Reads an 8 bit value over I2C
  *  @param  reg
  *  @return value
@@ -67,7 +67,7 @@ uint8_t AdafruitTCS34725::read8(uint8_t reg) {
     return buffer[0];
 }
 
-/*!
+/**
  *  @brief  Reads a 16 bit values over I2C
  *  @param  reg
  *  @return value
@@ -78,7 +78,7 @@ uint16_t AdafruitTCS34725::read16(uint8_t reg) {
     return (uint16_t(buffer[1]) << 8) | (uint16_t(buffer[0]) & 0xFF);
 }
 
-/*!
+/**
  *  @brief  Enables the device
  */
 void AdafruitTCS34725::enable() {
@@ -95,7 +95,7 @@ void AdafruitTCS34725::enable() {
     delay((256 - _tcs34725IntegrationTime) * 12 / 5 + 1);
 }
 
-/*!
+/**
  *  @brief  Disables the device (putting it in lower power sleep mode)
  */
 void AdafruitTCS34725::disable() {
@@ -104,7 +104,7 @@ void AdafruitTCS34725::disable() {
     write8(TCS34725_ENABLE, reg & ~(TCS34725_ENABLE_PON | TCS34725_ENABLE_AEN));
 }
 
-/*!
+/**
  *  @brief  Constructor
  *  @param  it
  *          Integration Time
@@ -117,7 +117,7 @@ void AdafruitTCS34725::disable() {
     _tcs34725Gain = gain;
 }
 
-/*!
+/**
  *  @brief  Initializes I2C and configures the sensor
  *  @param  addr
  *          i2c address
@@ -133,7 +133,7 @@ boolean AdafruitTCS34725::begin(uint8_t addr, TwoWire *theWire) {
     return init();
 }
 
-/*!
+/**
  *  @brief  Part of begin
  *  @return True if initialization was successful, otherwise false.
  */
@@ -158,7 +158,7 @@ boolean AdafruitTCS34725::init() {
     return true;
 }
 
-/*!
+/**
  *  @brief  Sets the integration time for the TC34725
  *  @param  it
  *          Integration Time
@@ -174,7 +174,7 @@ void AdafruitTCS34725::setIntegrationTime(uint8_t it) {
     _tcs34725IntegrationTime = it;
 }
 
-/*!
+/**
  *  @brief  Adjusts the gain on the TCS34725
  *  @param  gain
  *          Gain (sensitivity to light)
@@ -190,7 +190,7 @@ void AdafruitTCS34725::setGain(tcs34725Gain_t gain) {
     _tcs34725Gain = gain;
 }
 
-/*!
+/**
  *  @brief  Reads the raw red, green, blue and clear channel values
  *  @param  *r
  *          Red value
@@ -216,7 +216,7 @@ void AdafruitTCS34725::getRawData(
     delay((256 - _tcs34725IntegrationTime) * 12 / 5 + 1);
 }
 
-/*!
+/**
  *  @brief  Reads the raw red, green, blue and clear channel values in
  *          one-shot mode (e.g., wakes from sleep, takes measurement, enters
  *          sleep)
@@ -239,7 +239,7 @@ void AdafruitTCS34725::getRawData(
     disable();
 }
 
-/*!
+/**
  *  @brief  Read the RGB color detected by the sensor.
  *  @param  *r
  *          Red value normalized to 0-255
@@ -264,7 +264,7 @@ void AdafruitTCS34725::getRawData(
     *b = static_cast<float>(blue) / static_cast<float>(sum) * 255.0f;
 }
 
-/*!
+/**
  *  @brief  Converts the raw R/G/B values to color temperature in degrees Kelvin
  *  @param  r
  *          Red value
@@ -308,7 +308,7 @@ void AdafruitTCS34725::getRawData(
     return (uint16_t) cct;
 }
 
-/*!
+/**
  *  @brief  Converts the raw R/G/B values to color temperature in degrees
  *          Kelvin using the algorithm described in DN40 from Taos (now AMS).
  *  @param  r
@@ -399,7 +399,7 @@ void AdafruitTCS34725::getRawData(
     return cct;
 }
 
-/*!
+/**
  *  @brief  Converts the raw R/G/B values to lux
  *  @param  r
  *          Red value
@@ -419,7 +419,7 @@ void AdafruitTCS34725::getRawData(
     return (uint16_t) illuminance;
 }
 
-/*!
+/**
  *  @brief  Sets interrupt for TCS34725
  *  @param  i
  *          Interrupt (True/False)
@@ -434,7 +434,7 @@ void AdafruitTCS34725::getRawData(
     write8(TCS34725_ENABLE, r);
 }
 
-/*!
+/**
  *  @brief  Clears inerrupt for TCS34725
  */
 [[maybe_unused]] void AdafruitTCS34725::clearInterrupt() {
@@ -442,7 +442,7 @@ void AdafruitTCS34725::getRawData(
     i2c_dev->write(buffer, 1);
 }
 
-/*!
+/**
  *  @brief  Sets inerrupt limits
  *  @param  low
  *          Low limit

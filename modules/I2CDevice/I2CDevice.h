@@ -28,7 +28,7 @@ public:
 
     [[maybe_unused]] bool setSpeed(uint32_t desiredclk);
 
-    /*!   @brief  How many bytes we can read in a transaction
+    /**   @brief  How many bytes we can read in a transaction
      *    @return The size of the Wire receive/transmit buffer */
     [[nodiscard]] size_t maxBufferSize() const { return _maxBufferSize; }
 

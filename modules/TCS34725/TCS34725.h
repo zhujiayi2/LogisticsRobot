@@ -1,4 +1,4 @@
-/*!
+/**
  *  @file Adafruit_TCS34725.h
  *
  *  Software License Agreement (BSD License)
@@ -191,7 +191,7 @@ typedef enum {
     TCS34725_GAIN_60X [[maybe_unused]] = 0x03  /**<  60x gain */
 } tcs34725Gain_t;
 
-/*!
+/**
  *  @brief  Class that stores state and functions for interacting with
  *          TCS34725 Color Sensor
  */

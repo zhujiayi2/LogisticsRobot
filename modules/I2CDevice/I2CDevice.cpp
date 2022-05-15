@@ -2,7 +2,7 @@
 
 //#define DEBUG_SERIAL Serial
 
-/*!
+/**
  *    @brief  Create an I2C device at a given address
  *    @param  addr The 7-bit I2C address for the device
  *    @param  theWire The I2C bus to use, defaults to &Wire
@@ -18,7 +18,7 @@ AdafruitI2CDevice::AdafruitI2CDevice(uint8_t addr, TwoWire *theWire) {
 #endif
 }
 
-/*!
+/**
  *    @brief  Initializes and does basic address detection
  *    @param  addr_detect Whether we should attempt to detect the I2C address
  * with a scan. 99% of sensors/devices don't mind but once in a while, they spaz
@@ -35,7 +35,7 @@ bool AdafruitI2CDevice::begin(bool addr_detect) {
     return true;
 }
 
-/*!
+/**
  *    @brief  De-initialize device, turn off the Wire interface
  */
 void AdafruitI2CDevice::end() {
@@ -52,7 +52,7 @@ void AdafruitI2CDevice::end() {
 #endif
 }
 
-/*!
+/**
  *    @brief  Scans I2C for the address - note will give a false-positive
  *    if there's no pullups on I2C
  *    @return True if I2C initialized and a device with the addr found
@@ -77,7 +77,7 @@ bool AdafruitI2CDevice::detected() {
     return false;
 }
 
-/*!
+/**
  *    @brief  Write a buffer or two to the I2C device. Cannot be more than
  * maxBufferSize() bytes.
  *    @param  buffer Pointer to buffer of data to write. This is const to
@@ -163,7 +163,7 @@ bool AdafruitI2CDevice::write(const uint8_t *buffer, size_t len, bool stop,
     }
 }
 
-/*!
+/**
  *    @brief  Read from I2C into a buffer from the I2C device.
  *    Cannot be more than maxBufferSize() bytes.
  *    @param  buffer Pointer to buffer of data to read into
@@ -222,7 +222,7 @@ bool AdafruitI2CDevice::_read(uint8_t *buffer, size_t len, bool stop) {
     return true;
 }
 
-/*!
+/**
  *    @brief  Write some data, then read some data from I2C into another buffer.
  *    Cannot be more than maxBufferSize() bytes. The buffers can point to
  *    same/overlapping locations.
@@ -243,13 +243,13 @@ bool AdafruitI2CDevice::write_then_read(const uint8_t *write_buffer,
     return read(read_buffer, read_len);
 }
 
-/*!
+/**
  *    @brief  Returns the 7-bit address of this device
  *    @return The 7-bit address of this device
  */
 [[maybe_unused]] uint8_t AdafruitI2CDevice::address() const { return _addr; }
 
-/*!
+/**
  *    @brief  Change the I2C clock speed to desired (relies on
  *    underlying Wire support!
  *    @param desiredclk The desired I2C SCL frequency
