@@ -9,8 +9,8 @@
 
 #include <Arduino.h>
 #include "LangFeatures.h"
-#include "AccelStepper/AccelStepper.h"
-#include "AccelStepper/MultiStepper.h"
+#include "AccelStepper.h"
+#include "MultiStepper.h"
 
 namespace stepper_motor {
     constexpr uint8_t kEnablePin = 34;  ///< Enable pin of driver board (A4988)

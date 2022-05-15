@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8.4)
+cmake_minimum_required(VERSION 3.13.3)
 
 # Configure Arduino toolchain. Open this file to set up your environment.
 set(CMAKE_TOOLCHAIN_FILE cmake/ArduinoToolchain.cmake)
@@ -12,13 +12,13 @@ set(FIRMWARE_NAME firmware)  # Firmware (.hex) name
 
 # Configure optimizations, depending on -DCMAKE_BUILD_TYPE flag.
 if (CMAKE_BUILD_TYPE STREQUAL Debug)
-    add_compile_options(-O0)  # No optimization
+    add_compile_options(-O0 -DDEBUG)  # No optimization
 elseif (CMAKE_BUILD_TYPE STREQUAL Release)
     add_compile_options(-O3)  # Full optimization
 endif ()
 
 # Configure CMake project.
-project(${PROJECT_NAME})
+project(${PROJECT_NAME} LANGUAGES C CXX ASM)  # BUGFIX: Make internal ASM files to be build.
 
 # ================================================
 #   Configure dependency libraries

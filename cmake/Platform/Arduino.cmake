@@ -1478,7 +1478,9 @@ function(find_sources VAR_NAME LIB_PATH RECURSE)
             ${LIB_PATH}/*.cxx
             ${LIB_PATH}/*.h
             ${LIB_PATH}/*.hh
-            ${LIB_PATH}/*.hxx)
+            ${LIB_PATH}/*.hxx
+            # BUGFIX: Make internal ASM files to be build.
+            ${LIB_PATH}/*.S)
 
     if (RECURSE)
         file(GLOB_RECURSE LIB_FILES ${FILE_SEARCH_LIST})

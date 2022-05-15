@@ -27,7 +27,7 @@
 #define CAR_CHASSIS_H_
 
 #include "LangFeatures.h"
-#include "StepperMotor/StepperMotor.h"
+#include "StepperMotor.h"
 
 namespace car_chassis {
     constexpr int kUltrasonicPin[2] = {A1, A0};
@@ -38,6 +38,14 @@ namespace car_chassis {
     class CarChassis : NO_COPY, NO_MOVE {
     public:
         CarChassis() = delete;
+
+        [[maybe_unused]] static int CrossDetect();
+
+        [[maybe_unused]] static void ObstacleAvoid(int d);
+
+        [[maybe_unused]] static void PrintDistance();
+
+        [[maybe_unused]] static void PrintGrayValue();
 
     private:
         [[maybe_unused]] static void SetMode(int mode);
@@ -57,14 +65,6 @@ namespace car_chassis {
         [[maybe_unused]] static inline void Stop() { StepperMotor.Move(0, 0, 0, 0); }
 
         [[maybe_unused]] static long GetDistance(const int pin[2]);
-
-        [[maybe_unused]] static int CrossDetect();
-
-        [[maybe_unused]] static void ObstacleAvoid(int d);
-
-        [[maybe_unused]] static void PrintDistance();
-
-        [[maybe_unused]] static void PrintGrayValue();
     };
 }
 

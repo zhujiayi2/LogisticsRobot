@@ -1,5 +1,5 @@
 #include "CarChassis.h"
-#include "ArduinoLog/ArduinoLog.h"
+#include "ArduinoLog.h"
 
 [[maybe_unused]] void car_chassis::CarChassis::SetMode(int mode) {
     switch (mode) {
@@ -24,7 +24,8 @@
     digitalWrite(pin[1], HIGH);
     delayMicroseconds(20);
     digitalWrite(pin[1], LOW);
-    duration = static_cast<long>(pulseIn(pin[0], HIGH, 1500) / 59);
+    duration = pulseIn(pin[0], HIGH, 1500);
+    duration /= 59;
     return (duration < 2 || duration > 200) ? 0 : duration;
 }
 
