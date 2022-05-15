@@ -23,7 +23,7 @@ NOTE: This project is designed for CMake to build. It will be very hard to move 
 Steps:
 
 1. Open `CMakeLists.txt`, modify the names in `Custom settings`.
-2. Open `cmake/ArduinoToolchain.cmake`, check of modify the path and target board
+2. Open `cmake/ArduinoToolchain.cmake`, check or modify the path and target board
    in `Environment settings` to fit your system environment.
 3. Create a directory `build` and open a terminal (Powershell is recommended) in it.
 4. Run cmake initialization command. Note that:
