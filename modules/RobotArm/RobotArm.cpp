@@ -1,6 +1,5 @@
+#include <ArduinoLog.h>
 #include "RobotArm.h"
-#include "ArduinoLog.h"
-#include <Arduino.h>
 
 void robot_arm::RobotArm::ServoStart(int index) {
     if (!servo_[index].attached()) servo_[index].attach(kServoPort[index]);

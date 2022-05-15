@@ -1,4 +1,4 @@
-/**
+/*!
  *  @file Adafruit_TCS34725.h
  *
  *  Software License Agreement (BSD License)
@@ -30,18 +30,16 @@
  *  OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
  *  DAMAGE.
  */
-#ifndef TCS34725_H_
-#define TCS34725_H_
+#ifndef _TCS34725_H_
+#define _TCS34725_H_
 
 #if ARDUINO >= 100
-
 #include <Arduino.h>
-
 #else
 #include <WProgram.h>
 #endif
 
-#include "I2CDevice.h"
+#include <Adafruit_I2CDevice.h>
 
 #define TCS34725_ADDRESS (0x29)     /**< I2C address **/
 #define TCS34725_COMMAND_BIT (0x80) /**< Command bit **/
@@ -185,63 +183,47 @@
 
 /** Gain settings for TCS34725  */
 typedef enum {
-    TCS34725_GAIN_1X = 0x00,  /**<  No gain  */
-    TCS34725_GAIN_4X [[maybe_unused]] = 0x01,  /**<  4x gain  */
-    TCS34725_GAIN_16X [[maybe_unused]] = 0x02, /**<  16x gain */
-    TCS34725_GAIN_60X [[maybe_unused]] = 0x03  /**<  60x gain */
+  TCS34725_GAIN_1X = 0x00,  /**<  No gain  */
+  TCS34725_GAIN_4X = 0x01,  /**<  4x gain  */
+  TCS34725_GAIN_16X = 0x02, /**<  16x gain */
+  TCS34725_GAIN_60X = 0x03  /**<  60x gain */
 } tcs34725Gain_t;
 
-/**
+/*!
  *  @brief  Class that stores state and functions for interacting with
  *          TCS34725 Color Sensor
  */
-class [[maybe_unused]] AdafruitTCS34725 {
+class Adafruit_TCS34725 {
 public:
-    [[maybe_unused]] explicit AdafruitTCS34725(uint8_t = TCS34725_INTEGRATIONTIME_2_4MS,
-                     tcs34725Gain_t = TCS34725_GAIN_1X);
+  Adafruit_TCS34725(uint8_t = TCS34725_INTEGRATIONTIME_2_4MS,
+                    tcs34725Gain_t = TCS34725_GAIN_1X);
 
-    boolean begin(uint8_t addr = TCS34725_ADDRESS, TwoWire *theWire = &Wire);
+  boolean begin(uint8_t addr = TCS34725_ADDRESS, TwoWire *theWire = &Wire);
+  boolean init();
 
-    boolean init();
-
-    void setIntegrationTime(uint8_t it);
-
-    void setGain(tcs34725Gain_t gain);
-
-    void getRawData(uint16_t *r, uint16_t *g, uint16_t *b, uint16_t *c);
-
-    [[maybe_unused]] void getRGB(float *r, float *g, float *b);
-
-    [[maybe_unused]] void getRawDataOneShot(uint16_t *r, uint16_t *g, uint16_t *b, uint16_t *c);
-
-    [[maybe_unused]] uint16_t calculateColorTemperature(uint16_t r, uint16_t g, uint16_t b);
-
-    [[maybe_unused]] [[nodiscard]] uint16_t calculateColorTemperature_dn40(uint16_t r, uint16_t g, uint16_t b,
-                                            uint16_t c) const;
-
-    [[maybe_unused]] uint16_t calculateLux(uint16_t r, uint16_t g, uint16_t b);
-
-    void write8(uint8_t reg, uint32_t value);
-
-    uint8_t read8(uint8_t reg);
-
-    uint16_t read16(uint8_t reg);
-
-    [[maybe_unused]] void setInterrupt(boolean flag);
-
-    [[maybe_unused]] void clearInterrupt();
-
-    [[maybe_unused]] void setIntLimits(uint16_t l, uint16_t h);
-
-    void enable();
-
-    void disable();
+  void setIntegrationTime(uint8_t it);
+  void setGain(tcs34725Gain_t gain);
+  void getRawData(uint16_t *r, uint16_t *g, uint16_t *b, uint16_t *c);
+  void getRGB(float *r, float *g, float *b);
+  void getRawDataOneShot(uint16_t *r, uint16_t *g, uint16_t *b, uint16_t *c);
+  uint16_t calculateColorTemperature(uint16_t r, uint16_t g, uint16_t b);
+  uint16_t calculateColorTemperature_dn40(uint16_t r, uint16_t g, uint16_t b,
+                                          uint16_t c);
+  uint16_t calculateLux(uint16_t r, uint16_t g, uint16_t b);
+  void write8(uint8_t reg, uint32_t value);
+  uint8_t read8(uint8_t reg);
+  uint16_t read16(uint8_t reg);
+  void setInterrupt(boolean flag);
+  void clearInterrupt();
+  void setIntLimits(uint16_t l, uint16_t h);
+  void enable();
+  void disable();
 
 private:
-    AdafruitI2CDevice *i2c_dev = nullptr;  ///< Pointer to I2C bus interface
-    boolean _tcs34725Initialised;
-    tcs34725Gain_t _tcs34725Gain;
-    uint8_t _tcs34725IntegrationTime;
+  Adafruit_I2CDevice *i2c_dev = NULL; ///< Pointer to I2C bus interface
+  boolean _tcs34725Initialised;
+  tcs34725Gain_t _tcs34725Gain;
+  uint8_t _tcs34725IntegrationTime;
 };
 
 #endif

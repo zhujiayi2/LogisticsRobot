@@ -1,5 +1,5 @@
+#include <ArduinoLog.h>
 #include "StepperMotor.h"
-#include "ArduinoLog.h"
 
 stepper_motor::StepperMotor::StepperMotor() :
         stepper_x_(1, 45, 44),

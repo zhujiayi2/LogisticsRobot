@@ -1,5 +1,6 @@
+#include <map>
+#include <ArduinoLog.h>
 #include "ColorDetector.h"
-#include "ArduinoLog.h"
 
 [[maybe_unused]] void color_detector::ColorDetector::Detect() {
     if (tcs_34725_.begin()) {
@@ -26,14 +27,17 @@
         c = Recognize();
     }
 
-    int times[Colors::SIZE] = {0};
+    std::map<Colors, int> times;
     for (const auto &c: color_list_)
-        ++times[c];
+        if (times.find(c) == times.end())
+            times[c] = 0;
+        else
+            ++times[c];
     Colors mode_color = kNone;
     int max_time = 0;
-    for (auto c = 0; c < Colors::SIZE; ++c)
-        if (times[c] > max_time)
-            mode_color = static_cast<Colors>(c);
+    for (auto &it: times)
+        if (it.second > max_time)
+            mode_color = it.first;
     return mode_color;
 }
 

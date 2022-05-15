@@ -7,8 +7,8 @@
 #ifndef COLOR_DETECTOR_H_
 #define COLOR_DETECTOR_H_
 
+#include <Adafruit_TCS34725.h>
 #include "LangFeatures.h"
-#include "TCS34725.h"
 
 namespace color_detector {
     constexpr uint8_t kDetectTimes = 8;  ///< Detect times per round
@@ -40,7 +40,7 @@ namespace color_detector {
 
         [[maybe_unused]] [[nodiscard]] Colors Recognize() const;
 
-        AdafruitTCS34725 tcs_34725_;
+        Adafruit_TCS34725 tcs_34725_;
         int color_val_[3];
         Colors color_list_[kDetectTimes];
     };

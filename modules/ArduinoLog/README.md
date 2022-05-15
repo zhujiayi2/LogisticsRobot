@@ -6,18 +6,18 @@ ArduinoLog - C++ Log library for Arduino devices
 
 *An minimalistic Logging framework for Arduino-compatible embedded systems.*
 
-ArduinoLog is a minimalistic framework to help the programmer output log statements to an output of choice, fashioned after extensive logging libraries such as log4cpp ,log4j and log4net. In case of problems with an application, it is helpful to enable logging so that the problem can be located. ArduinoLog is designed so that log statements can remain in the code with minimal performance cost. In order to facilitate this the loglevel can be adjusted, and (if your code is completely tested) all logging code can be compiled out.
+ArduinoLog is a minimalistic framework to help the programmer output log statements to an output of choice, fashioned after extensive logging libraries such as log4cpp ,log4j and log4net. In case of problems with an application, it is helpful to enable logging so that the problem can be located. ArduinoLog is designed so that log statements can remain in the code with minimal performance cost. In order to facilitate this the loglevel can be adjusted, and (if your code is completely tested) all logging code can be compiled out. 
 
 ## Features
 
 * Different log levels (Error, Info, Warn, Debug, Verbose )
 * Supports multiple variables
-* Supports formatted strings
+* Supports formatted strings 
 * Supports formatted strings from flash memory
 * Fixed memory allocation (zero malloc)
 * MIT License
 
-## Tested for
+## Tested for 
 
 * All Arduino boards (Uno, Due, Mini, Micro, Yun...)
 * ESP8266
@@ -25,16 +25,16 @@ ArduinoLog is a minimalistic framework to help the programmer output log stateme
 
 ## Downloading
 
-This package has been published to the Arduino & PlatformIO package managers, but you can also download it from GitHub.
+This package has been published to the Arduino & PlatformIO package managers, but you can also download it from GitHub. 
 
-- By directly loading fetching the Archive from GitHub:
-1. Go to [https://github.com/thijse/Arduino-Log](https://github.com/thijse/Arduino-Log)
-2. Click the DOWNLOAD ZIP button in the panel on the
-3. Rename the uncompressed folder **Arduino-Log-master** to **Arduino-Log**.
-4. You may need to create the libraries subfolder if its your first library.
-5. Place the **Arduino-Log** library folder in your **<arduinosketchfolder>/libraries/** folder.
-5. Restart the IDE.
-6. For more information, [read this extended manual](http://thijs.elenbaas.net/2012/07/installing-an-arduino-library/)
+- By directly loading fetching the Archive from GitHub: 
+ 1. Go to [https://github.com/thijse/Arduino-Log](https://github.com/thijse/Arduino-Log)
+ 2. Click the DOWNLOAD ZIP button in the panel on the
+ 3. Rename the uncompressed folder **Arduino-Log-master** to **Arduino-Log**.
+ 4. You may need to create the libraries subfolder if its your first library.  
+ 5. Place the **Arduino-Log** library folder in your **<arduinosketchfolder>/libraries/** folder. 
+ 5. Restart the IDE.
+ 6. For more information, [read this extended manual](http://thijs.elenbaas.net/2012/07/installing-an-arduino-library/)
 
 
 ## Quick start
@@ -118,7 +118,7 @@ where the format string can be used to format the log variables
 * %p    display a  printable object 
 ```
 
-Newlines can be added using the `CR` keyword or by using the `...ln` version of each of the log functions.  The difference when using the `...ln` is that the newline is placed after suffix, and only a single newline can be added. Some terminals prefer `NL` (New line).
+ Newlines can be added using the `CR` keyword or by using the `...ln` version of each of the log functions.  The difference when using the `...ln` is that the newline is placed after suffix, and only a single newline can be added. Some terminals prefer `NL` (New line).
 
 ### Examples
 
@@ -133,7 +133,7 @@ Log.verboseln (F("Log as Verbose with bool value from Flash     : %t, %T"  ) , t
 
 ### Disable library
 
-(if your code is completely tested) all logging code can be compiled out. Do this by uncommenting
+(if your code is completely tested) all logging code can be compiled out. Do this by uncommenting  
 ```c++
 #define DISABLE_LOGGING 
 ```
@@ -155,8 +155,8 @@ Log.verboseln ("ip address   : %p", ipAddress);
 ```
 
 [this example](https://forum.arduino.cc/t/printable-classes/438816) shows how to make your own classes printable
-
-### Storing messages in Flash memory
+ 
+ ### Storing messages in Flash memory
 
 Flash strings log variables can be stored and reused at several places to reduce final hex size.
 
@@ -192,8 +192,8 @@ will result in log timestamps very similar to e.g. NLOG:
 
 ## Credit
 
-Based on library by
-* [Bernd Klein](https://github.com/mrRobot62)
+Based on library by 
+* [Bernd Klein](https://github.com/mrRobot62)  
 
 Bugfixes & features by
 * [rahuldeo2047](https://github.com/rahuldeo2047)
@@ -212,7 +212,7 @@ Bugfixes & features by
 ## On using and modifying libraries
 
 - [http://www.arduino.cc/en/Main/Libraries](http://www.arduino.cc/en/Main/Libraries)
-- [http://www.arduino.cc/en/Reference/Libraries](http://www.arduino.cc/en/Reference/Libraries)
+- [http://www.arduino.cc/en/Reference/Libraries](http://www.arduino.cc/en/Reference/Libraries) 
 
 ## Copyright
 

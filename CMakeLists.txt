@@ -23,11 +23,9 @@ project(${PROJECT_NAME} LANGUAGES C CXX ASM)  # BUGFIX: Make internal ASM files 
 # Configure global header searching path.
 include_directories(modules)
 
-# ================================================
-#   Configure project library
-# ================================================
+# Configure project library.
 file(GLOB PROJECT_SRCS modules/*/*.c*)
 generate_arduino_library(${PROJECT_NAME} BOARD ${TARGET_BOARD} SRCS ${PROJECT_SRCS})
 
-# Generate firmware
+# Generate firmware.
 generate_arduino_firmware(${FIRMWARE_NAME} BOARD ${TARGET_BOARD} LIBS ${PROJECT_NAME} SKETCH LogisticsRobot.ino)

@@ -7,7 +7,8 @@
 #ifndef ROBOT_ARM_H_
 #define ROBOT_ARM_H_
 
-#include "ServoTimer2.h"
+#include <Arduino.h>
+#include <ServoTimer2.h>
 #include "ColorDetector.h"
 
 namespace robot_arm {

@@ -1,5 +1,4 @@
-#include <Arduino.h>
-#include "ArduinoLog.h"
+#include <ArduinoLog.h>
 #include "CarChassis.h"
 #include "RobotArm.h"
 
