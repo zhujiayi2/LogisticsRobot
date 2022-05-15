@@ -1,4 +1,5 @@
 #include "RobotArm.h"
+#include "ArduinoLog.h"
 #include <Arduino.h>
 
 void robot_arm::RobotArm::ServoStart(int index) {
@@ -41,6 +42,10 @@ void robot_arm::RobotArm::ServoMove(float v1, float v2, float v3, float v4) {
 }
 
 void robot_arm::RobotArm::Grab(Blocks block) {
+#ifdef DEBUG
+    Log.infoln("Grab: %d.", static_cast<int>(block));
+#endif
+
     switch (block) {
         case kBlockA:
             ServoMove(1650, 1850, 860, 1800);
@@ -65,6 +70,10 @@ void robot_arm::RobotArm::Grab(Blocks block) {
 }
 
 void robot_arm::RobotArm::Place(Colors color) {
+#ifdef DEBUG
+    Log.infoln("Place: %d.", static_cast<int>(color));
+#endif
+
     switch (color) {
         case Colors::kRed:
             ServoMove(1020, 1600, 750, 2100);

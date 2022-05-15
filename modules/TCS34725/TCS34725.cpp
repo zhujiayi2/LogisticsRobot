@@ -127,7 +127,7 @@ void AdafruitTCS34725::disable() {
  */
 boolean AdafruitTCS34725::begin(uint8_t addr, TwoWire *theWire) {
     if (i2c_dev)
-        delete i2c_dev;
+        free(i2c_dev) ;
     i2c_dev = new AdafruitI2CDevice(addr, theWire);
 
     return init();

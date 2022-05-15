@@ -1,3 +1,9 @@
+/**
+ * @brief Driver of robot arm header file.
+ * @author trantuan-20048607
+ * @date 2022.5.15
+ */
+
 #ifndef ROBOT_ARM_H_
 #define ROBOT_ARM_H_
 
@@ -5,12 +11,12 @@
 #include "ColorDetector.h"
 
 namespace robot_arm {
-    constexpr uint8_t kServoNum = 4;
-    constexpr int kServoPort[kServoNum] = {2, 3, 4, 5};
-    constexpr int kDivPartNum = 40;
+    constexpr uint8_t kServoNum = 4;  ///< Number of servos
+    constexpr int kServoPort[kServoNum] = {2, 3, 4, 5};  ///< Ports of servos
+    constexpr int kDivPartNum = 40;  ///< Parts to divide when moving
 
     enum Blocks {
-        kNone = 0x0,
+        kNone [[maybe_unused]] = 0x0,
         kBlockA = 0x1,
         kBlockB = 0x2,
         kBlockC = 0x3,

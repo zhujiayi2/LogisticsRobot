@@ -19,11 +19,7 @@ namespace stepper_motor {
     constexpr uint16_t kTotalStep = kMainStep * kMicroStep;  ///< Total steps
     constexpr uint16_t kMaxSpeed = 6400;  ///< Max speed
 
-    /**
-     * @brief Main class of stepper motor, SINGLETON.
-     * @warning All use of StepperMotor are redirected to stepper_motor::StepperMotor::Instance().
-     */
-    class StepperMotor : NO_COPY, NO_MOVE {
+    class StepperMotor : NO_COPY {
     public:
         [[maybe_unused]] inline static StepperMotor &Instance() {
             static StepperMotor _{};
@@ -39,9 +35,8 @@ namespace stepper_motor {
     private:
         StepperMotor();
 
-        /// AccelStepper parameters on each axis
         AccelStepper stepper_x_, stepper_y_, stepper_z_, stepper_a_;
-        MultiStepper steppers_;  ///< Stepper group
+        MultiStepper steppers_;
     };
 }
 

@@ -1,3 +1,9 @@
+/**
+ * @brief Driver of color detector header file.
+ * @author trantuan-20048607
+ * @date 2022.5.15
+ */
+
 #ifndef COLOR_DETECTOR_H_
 #define COLOR_DETECTOR_H_
 
@@ -5,7 +11,7 @@
 #include "TCS34725.h"
 
 namespace color_detector {
-    constexpr uint8_t kDetectTimes = 8;  ///< Detect times
+    constexpr uint8_t kDetectTimes = 8;  ///< Detect times per round
 
     enum Colors {
         kNone = 0x0,

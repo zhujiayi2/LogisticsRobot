@@ -20,12 +20,6 @@ endif ()
 # Configure CMake project.
 project(${PROJECT_NAME} LANGUAGES C CXX ASM)  # BUGFIX: Make internal ASM files to be build.
 
-# ================================================
-#   Configure dependency libraries
-# ================================================
-generate_arduino_library(Wire BOARD ${TARGET_BOARD}  # Wire
-        SRCS ${ARDUINO_SDK_PATH}/hardware/arduino/avr/libraries/Wire/src/Wire.cpp)
-
 # Configure global header searching path.
 include_directories(modules)
 
@@ -35,10 +29,5 @@ include_directories(modules)
 file(GLOB PROJECT_SRCS modules/*/*.c*)
 generate_arduino_library(${PROJECT_NAME} BOARD ${TARGET_BOARD} SRCS ${PROJECT_SRCS})
 
-# ================================================
-#   Generate firmware
-# ================================================
-generate_arduino_firmware(${FIRMWARE_NAME}
-        BOARD ${TARGET_BOARD}
-        LIBS ${PROJECT_NAME} Wire  # Add more libraries here.
-        SKETCH LogisticsRobot.ino)
+# Generate firmware
+generate_arduino_firmware(${FIRMWARE_NAME} BOARD ${TARGET_BOARD} LIBS ${PROJECT_NAME} SKETCH LogisticsRobot.ino)

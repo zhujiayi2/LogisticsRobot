@@ -8,6 +8,7 @@ constexpr uint32_t kBaudRate = 9600;
 void setup() {
     Serial.begin(kBaudRate);
     Log.begin(LOG_LEVEL_VERBOSE, &Serial);
+    Log.infoln("Current baud rate: %d.", kBaudRate);
 
     for (auto i = 0; i < 2; i++) {
         pinMode(car_chassis::kOutsideSensorPin[i], INPUT);
@@ -19,10 +20,5 @@ void setup() {
 }
 
 void loop() {
-#ifdef DEBUG
-    CarChassis::PrintDistance();
-    CarChassis::PrintGrayValue();
-    Log.infoln("Cross detect: %d.", CarChassis::CrossDetect());
-#endif
     CarChassis::ObstacleAvoid(CarChassis::CrossDetect());
 }

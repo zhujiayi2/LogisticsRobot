@@ -43,8 +43,14 @@
         delay(1000);
         RobotArm.Run();
         delay(50000);
-    } else
+    } else {
+#ifdef DEBUG
+        CarChassis::PrintDistance();
+        CarChassis::PrintGrayValue();
+        Log.infoln("Cross detect: %d.", CarChassis::CrossDetect());
+#endif
         SetMode(CrossDetect());
+    }
 }
 
 [[maybe_unused]] void car_chassis::CarChassis::PrintDistance() {
