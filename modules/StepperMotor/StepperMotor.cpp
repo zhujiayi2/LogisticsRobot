@@ -14,7 +14,7 @@ stepper_motor::StepperMotor::StepperMotor() :
     steppers_.addStepper(stepper_y_);
     steppers_.addStepper(stepper_z_);
     steppers_.addStepper(stepper_a_);
-    // TODO stepperSet(V_MAX);  // Configure the initial MAX speed.
+    SetMaxSpeed(static_cast<double>(kMaxSpeed));  // Configure the initial MAX speed.
 }
 
 [[maybe_unused]] void stepper_motor::StepperMotor::SetMaxSpeed(double v) {

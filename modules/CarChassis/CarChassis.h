@@ -1,3 +1,28 @@
+/**
+ * @brief Car chassis header file.
+ * @author trantuan-20048607
+ * @date 2022.5.15
+ * @details Diagram:\n
+ *   C: Ultrasonic distance sensor\n
+ *   H: Gray sensor\n
+ *   B: Stepper motor (X:44,45 Y:32,33 Z:42,43 A:30,31)
+ *
+ * @code
+ *                                     (A0, A1)
+ *                        (A3)      (A5)  |  (A12)     (A10)
+ *                         |         |    |    |         |
+ *                    -----H---------H----C----H---------H----
+ *   (dir:32,step:33):B                                      B:(44,45)
+ *                    |                                      |
+ *                    |                                      |
+ *                    |                                      |
+ *                    |                                      |
+ *                    |                                      |
+ *   (dir:30,step:31):B                                      B:(42,43)
+ *                    ----------------------------------------
+ * @endcode
+ */
+
 #ifndef CAR_CHASSIS_H_
 #define CAR_CHASSIS_H_
 
@@ -5,30 +30,44 @@
 #include "StepperMotor/StepperMotor.h"
 
 namespace car_chassis {
+    constexpr int kUltrasonicPin[2] = {A1, A0};
+    constexpr int kOutsideSensorPin[2] = {A3, A10};
+    constexpr int kMedialSensorPin[2] = {A5, A12};
+    [[maybe_unused]] constexpr int kSensorPin[4] = {A3, A5, A12, A10};
+
     class CarChassis : NO_COPY, NO_MOVE {
     public:
-        [[maybe_unused]] inline static CarChassis &Instance() {
-            static CarChassis _{};
-            return _;
-        }
+        CarChassis() = delete;
 
     private:
-        CarChassis() = default;
+        [[maybe_unused]] static void SetMode(int mode);
 
-        [[maybe_unused]] inline void Forward() { StepperMotor.Move(0.105, -0.104, 0.104, -0.1); }
+        [[maybe_unused]] static inline void Forward() { StepperMotor.Move(0.105, -0.104, 0.104, -0.1); }
 
-        [[maybe_unused]] inline void Backward() { StepperMotor.Move(-0.5, 0.5, -0.5, 0.5); }
+        [[maybe_unused]] static inline void Backward() { StepperMotor.Move(-0.5, 0.5, -0.5, 0.5); }
 
-        [[maybe_unused]] inline void Left() { StepperMotor.Move(0.24, 0.24, 0.24, 0.24); }
+        [[maybe_unused]] static inline void Left() { StepperMotor.Move(0.24, 0.24, 0.24, 0.24); }
 
-        [[maybe_unused]] inline void Right() { StepperMotor.Move(-0.23, -0.23, -0.23, -0.23); }
+        [[maybe_unused]] static inline void Right() { StepperMotor.Move(-0.23, -0.23, -0.23, -0.23); }
 
-        [[maybe_unused]] inline void PanLeft(double v) { StepperMotor.Move(v, v, -v, -v); }
+        [[maybe_unused]] static inline void PanLeft(double v) { StepperMotor.Move(v, v, -v, -v); }
 
-        [[maybe_unused]] inline void PanRight(double v) { StepperMotor.Move(-v, -v, v, v); }
+        [[maybe_unused]] static inline void PanRight(double v) { StepperMotor.Move(-v, -v, v, v); }
 
-        [[maybe_unused]] inline void Stop() { StepperMotor.Move(0, 0, 0, 0); }
+        [[maybe_unused]] static inline void Stop() { StepperMotor.Move(0, 0, 0, 0); }
+
+        [[maybe_unused]] static long GetDistance(const int pin[2]);
+
+        [[maybe_unused]] static int CrossDetect();
+
+        [[maybe_unused]] static void ObstacleAvoid(int d);
+
+        [[maybe_unused]] static void PrintDistance();
+
+        [[maybe_unused]] static void PrintGrayValue();
     };
 }
+
+using CarChassis [[maybe_unused]] = car_chassis::CarChassis;
 
 #endif  // CAR_CHASSIS_H_

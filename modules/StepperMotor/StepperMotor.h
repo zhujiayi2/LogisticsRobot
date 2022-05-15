@@ -17,6 +17,7 @@ namespace stepper_motor {
     constexpr uint16_t kMainStep = 200;  ///< Main steps per round
     constexpr uint16_t kMicroStep = 16;  ///< Subdivided steps per one main step
     constexpr uint16_t kTotalStep = kMainStep * kMicroStep;  ///< Total steps
+    constexpr uint16_t kMaxSpeed = 6400;  ///< Max speed
 
     /**
      * @brief Main class of stepper motor, SINGLETON.
