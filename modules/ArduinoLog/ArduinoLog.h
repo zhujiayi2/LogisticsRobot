@@ -92,7 +92,7 @@ typedef void (*printfunction)(Print *, int);
  */
 
 class Logging {
-public:
+private:
     /**
      * default Constructor
      */
@@ -104,6 +104,12 @@ public:
 #endif
     {
 
+    }
+
+public:
+    inline static Logging &instance() {
+        static Logging _{};
+        return _;
     }
 
     /**
@@ -131,7 +137,7 @@ public:
      *
      * \return The current log level.
      */
-    int getLevel() const;
+    [[maybe_unused]] [[nodiscard]] int getLevel() const;
 
     /**
      * Set whether to show the log level.
@@ -148,7 +154,7 @@ public:
      * \return true if the log level is be shown for each log
      *         false otherwise.
      */
-    bool getShowLevel() const;
+    [[maybe_unused]] [[nodiscard]] bool getShowLevel() const;
 
     /**
      * Sets a function to be called before each log command.
@@ -156,14 +162,14 @@ public:
      * \param f - The function to be called
      * \return void
      */
-    void setPrefix(printfunction f);
+    [[maybe_unused]] void setPrefix(printfunction f);
 
     /**
      * clears prefix.
      *
      * \return void
      */
-    void clearPrefix();
+    [[maybe_unused]] void clearPrefix();
 
     /**
      * Sets a function to be called after each log command.
@@ -171,14 +177,14 @@ public:
      * \param f - The function to be called
      * \return void
      */
-    void setSuffix(printfunction f);
+    [[maybe_unused]] void setSuffix(printfunction f);
 
     /**
      * clears suffix.
      *
      * \return void
      */
-    void clearSuffix();
+    [[maybe_unused]] void clearSuffix();
 
     /**
      * Output a fatal error message. Output message contains
@@ -191,14 +197,14 @@ public:
      * \return void
      */
     template<class T, typename... Args>
-    void fatal(T msg, Args... args) {
+    [[maybe_unused]] void fatal(T msg, Args... args) {
 #ifndef DISABLE_LOGGING
         printLevel(LOG_LEVEL_FATAL, false, msg, args...);
 #endif
     }
 
     template<class T, typename... Args>
-    void fatalln(T msg, Args... args) {
+    [[maybe_unused]] void fatalln(T msg, Args... args) {
 #ifndef DISABLE_LOGGING
         printLevel(LOG_LEVEL_FATAL, true, msg, args...);
 #endif
@@ -215,14 +221,14 @@ public:
      * \return void
      */
     template<class T, typename... Args>
-    void error(T msg, Args... args) {
+    [[maybe_unused]] void error(T msg, Args... args) {
 #ifndef DISABLE_LOGGING
         printLevel(LOG_LEVEL_ERROR, false, msg, args...);
 #endif
     }
 
     template<class T, typename... Args>
-    void errorln(T msg, Args... args) {
+    [[maybe_unused]] void errorln(T msg, Args... args) {
 #ifndef DISABLE_LOGGING
         printLevel(LOG_LEVEL_ERROR, true, msg, args...);
 #endif
@@ -239,14 +245,14 @@ public:
      * \return void
      */
     template<class T, typename... Args>
-    void warning(T msg, Args...args) {
+    [[maybe_unused]] void warning(T msg, Args...args) {
 #ifndef DISABLE_LOGGING
         printLevel(LOG_LEVEL_WARNING, false, msg, args...);
 #endif
     }
 
     template<class T, typename... Args>
-    void warningln(T msg, Args...args) {
+    [[maybe_unused]] void warningln(T msg, Args...args) {
 #ifndef DISABLE_LOGGING
         printLevel(LOG_LEVEL_WARNING, true, msg, args...);
 #endif
@@ -263,28 +269,28 @@ public:
      * \return void
      */
     template<class T, typename... Args>
-    void notice(T msg, Args...args) {
+    [[maybe_unused]] void notice(T msg, Args...args) {
 #ifndef DISABLE_LOGGING
         printLevel(LOG_LEVEL_NOTICE, false, msg, args...);
 #endif
     }
 
     template<class T, typename... Args>
-    void noticeln(T msg, Args...args) {
+    [[maybe_unused]] void noticeln(T msg, Args...args) {
 #ifndef DISABLE_LOGGING
         printLevel(LOG_LEVEL_NOTICE, true, msg, args...);
 #endif
     }
 
     template<class T, typename... Args>
-    void info(T msg, Args...args) {
+    [[maybe_unused]] void info(T msg, Args...args) {
 #ifndef DISABLE_LOGGING
         printLevel(LOG_LEVEL_INFO, false, msg, args...);
 #endif
     }
 
     template<class T, typename... Args>
-    void infoln(T msg, Args...args) {
+    [[maybe_unused]] void infoln(T msg, Args...args) {
 #ifndef DISABLE_LOGGING
         printLevel(LOG_LEVEL_INFO, true, msg, args...);
 #endif
@@ -301,14 +307,14 @@ public:
      * \return void
     */
     template<class T, typename... Args>
-    void trace(T msg, Args... args) {
+    [[maybe_unused]] void trace(T msg, Args... args) {
 #ifndef DISABLE_LOGGING
         printLevel(LOG_LEVEL_TRACE, false, msg, args...);
 #endif
     }
 
     template<class T, typename... Args>
-    void traceln(T msg, Args... args) {
+    [[maybe_unused]] void traceln(T msg, Args... args) {
 #ifndef DISABLE_LOGGING
         printLevel(LOG_LEVEL_TRACE, true, msg, args...);
 #endif
@@ -325,14 +331,14 @@ public:
      * \return void
      */
     template<class T, typename... Args>
-    void verbose(T msg, Args... args) {
+    [[maybe_unused]] void verbose(T msg, Args... args) {
 #ifndef DISABLE_LOGGING
         printLevel(LOG_LEVEL_VERBOSE, false, msg, args...);
 #endif
     }
 
     template<class T, typename... Args>
-    void verboseln(T msg, Args... args) {
+    [[maybe_unused]] void verboseln(T msg, Args... args) {
 #ifndef DISABLE_LOGGING
         printLevel(LOG_LEVEL_VERBOSE, true, msg, args...);
 #endif
@@ -343,11 +349,11 @@ private:
 
     void print(const __FlashStringHelper *format, va_list args);
 
-    void print(const Printable &obj, va_list args) {
+    void print(const Printable &obj, [[maybe_unused]] va_list args) {
         _logOutput->print(obj);
     }
 
-    void printFormat(const char format, va_list *args);
+    void printFormat(char format, va_list *args);
 
     template<class T>
     void printLevel(int level, bool cr, T msg, ...) {
@@ -393,6 +399,6 @@ private:
 #endif
 };
 
-extern Logging Log;
+[[maybe_unused]] extern Logging &Log;
 
 #endif  // ARDUINO_LOG_H_

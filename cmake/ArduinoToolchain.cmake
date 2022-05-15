@@ -1,11 +1,17 @@
 set(CMAKE_SYSTEM_NAME Arduino)
 
 # ================================================
-#   环境设置 | Environment settings
+#   Environment settings
 # ================================================
-set(ARDUINO_SDK_PATH D:/Arduino)  # SDK 路径, 确保内部包含 "hardware" 目录
-set(TARGET_BOARD mega)  # 目标版型
-set(ARDUINO_CPU atmega2560)  # 目标 CPU 型号
+set(ARDUINO_SDK_PATH D:/Arduino)  # SDK path, including "hardware" directory
+set(TARGET_BOARD mega)  # Target board
+# Target CPU, REMAIN EMPTY or DELETE it if TARGET_BOARD is:
+#   yun, uno, megaADK, leonardo, leonardoeth, micro, esplora,
+#   ethernet, fio, LilyPadUSB, robotControl, robotMotor, gemma,
+#   circuitplay32u4cat, yunmini, chiwawa, one, unowifi
+# Otherwise, you MUST set this variable when TARGET_BOARD is set as:
+#   diecimila, nano, mega, mini, bt, lilypad, pro, atmegang
+set(ARDUINO_CPU atmega2560)
 
 set(CMAKE_C_COMPILER avr-gcc)
 set(CMAKE_CXX_COMPILER avr-g++)

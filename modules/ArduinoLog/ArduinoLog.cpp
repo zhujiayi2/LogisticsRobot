@@ -25,7 +25,7 @@ void Logging::setLevel(int level) {
 #endif
 }
 
-int Logging::getLevel() const {
+[[maybe_unused]] int Logging::getLevel() const {
 #ifndef DISABLE_LOGGING
     return _level;
 #else
@@ -39,7 +39,7 @@ void Logging::setShowLevel(bool showLevel) {
 #endif
 }
 
-bool Logging::getShowLevel() const {
+[[maybe_unused]] bool Logging::getShowLevel() const {
 #ifndef DISABLE_LOGGING
     return _showLevel;
 #else
@@ -47,25 +47,25 @@ bool Logging::getShowLevel() const {
 #endif
 }
 
-void Logging::setPrefix(printfunction f) {
+[[maybe_unused]] void Logging::setPrefix(printfunction f) {
 #ifndef DISABLE_LOGGING
     _prefix = f;
 #endif
 }
 
-void Logging::clearPrefix() {
+[[maybe_unused]] void Logging::clearPrefix() {
 #ifndef DISABLE_LOGGING
     _prefix = nullptr;
 #endif
 }
 
-void Logging::setSuffix(printfunction f) {
+[[maybe_unused]] void Logging::setSuffix(printfunction f) {
 #ifndef DISABLE_LOGGING
     _suffix = f;
 #endif
 }
 
-void Logging::clearSuffix() {
+[[maybe_unused]] void Logging::clearSuffix() {
 #ifndef DISABLE_LOGGING
     _prefix = nullptr;
 #endif
@@ -189,4 +189,4 @@ void Logging::printFormat(const char format, va_list *args) {
 #endif
 }
 
-Logging Log = Logging();
+[[maybe_unused]] Logging &Log = Logging::instance();
