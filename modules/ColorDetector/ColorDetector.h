@@ -42,4 +42,6 @@ namespace color_detector {
 
 [[maybe_unused]] extern color_detector::ColorDetector &ColorDetector;
 
+using Colors [[maybe_unused]] = color_detector::Colors;
+
 #endif  // COLOR_DETECTOR_H_

@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include "ArduinoLog.h"
 #include "CarChassis.h"
+#include "RobotArm.h"
 
 constexpr uint32_t kBaudRate = 9600;
 
@@ -14,6 +15,7 @@ void setup() {
     }
 
     StepperMotor.Initialize();
+    RobotArm.Initialize();
 }
 
 void loop() {

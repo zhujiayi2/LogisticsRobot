@@ -1,5 +1,6 @@
 #include "CarChassis.h"
 #include "ArduinoLog.h"
+#include "RobotArm.h"
 
 [[maybe_unused]] void car_chassis::CarChassis::SetMode(int mode) {
     switch (mode) {
@@ -24,7 +25,7 @@
     digitalWrite(pin[1], HIGH);
     delayMicroseconds(20);
     digitalWrite(pin[1], LOW);
-    duration = pulseIn(pin[0], HIGH, 1500);
+    duration = static_cast<long>(pulseIn(pin[0], HIGH, 1500));
     duration /= 59;
     return (duration < 2 || duration > 200) ? 0 : duration;
 }
@@ -40,7 +41,7 @@
     if ((GetDistance(kUltrasonicPin) > 2 && GetDistance(kUltrasonicPin) < d)) {
         Forward();
         delay(1000);
-        // TODO RobotArm();
+        RobotArm.Run();
         delay(50000);
     } else
         SetMode(CrossDetect());
