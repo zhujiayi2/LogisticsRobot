@@ -21,8 +21,8 @@ namespace stepper_motor {
     class StepperMotor : SINGLETON {
     public:
         inline static StepperMotor &Instance() {
-            static StepperMotor _{};
-            return _;
+            static auto *_ = new StepperMotor();
+            return *_;
         }
 
         [[maybe_unused]] void Initialize();

@@ -35,10 +35,8 @@ namespace car_chassis {
     constexpr int kMedialSensorPin[2] = {A5, A12};
     [[maybe_unused]] constexpr int kSensorPin[4] = {A3, A5, A12, A10};
 
-    class CarChassis : SINGLETON {
+    class CarChassis : MODULE {
     public:
-        CarChassis() = delete;
-
         [[maybe_unused]] static void ObstacleAvoid(int min_distance);
 
     private:

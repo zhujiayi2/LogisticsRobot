@@ -17,8 +17,17 @@ namespace disable_constructors {
 
         ~Singleton() = default;
     };
+
+    class Module : public Singleton {
+    public:
+        Module() = delete;
+
+        ~Module() = default;
+    };
 }
 
 #define SINGLETON public disable_constructors::Singleton
+
+#define MODULE public disable_constructors::Module
 
 #endif  // LANG_FEATURES_H_

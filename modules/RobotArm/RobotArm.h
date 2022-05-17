@@ -23,8 +23,8 @@ namespace robot_arm {
     class RobotArm : SINGLETON {
     public:
         static RobotArm &Instance() {
-            static RobotArm _{};
-            return _;
+            static auto *_ = new RobotArm();
+            return *_;
         }
 
         [[maybe_unused]] void Initialize();

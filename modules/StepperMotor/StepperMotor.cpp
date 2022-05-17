@@ -25,12 +25,10 @@ stepper_motor::StepperMotor::StepperMotor() :
 }
 
 [[maybe_unused]] void stepper_motor::StepperMotor::Move(double x, double y, double z, double a) {
-    double step_x = -x * kTotalStep, step_y = -y * kTotalStep,
-            step_z = -z * kTotalStep, step_a = -a * kTotalStep;
-    long positions[4] = {static_cast<long>(step_x),
-                         static_cast<long>(step_y),
-                         static_cast<long>(step_z),
-                         static_cast<long>(step_a)};
+    long positions[4] = {static_cast<long>(-x * kTotalStep),
+                         static_cast<long>(-y * kTotalStep),
+                         static_cast<long>(-z * kTotalStep),
+                         static_cast<long>(-a * kTotalStep)};
 #ifdef DEBUG
     Log.infoln("Move to: X %F Y %F Z %F A %F.", positions[0], positions[1], positions[2], positions[3]);
 #endif

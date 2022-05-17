@@ -20,8 +20,8 @@ namespace color_detector {
     class ColorDetector : SINGLETON {
     public:
         inline static ColorDetector &Instance() {
-            static ColorDetector _{};
-            return _;
+            static auto *_ = new ColorDetector();
+            return *_;
         }
 
         [[maybe_unused]] Colors GetColor();
